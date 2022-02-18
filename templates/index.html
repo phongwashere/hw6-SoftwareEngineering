@@ -3,13 +3,13 @@
 
     </header>
     <body>
-        <form method="POST" action="/">
-            <input type="text">
-            <input type="submit" name="Add a Show!">
+        <form method="POST" action="/added">
+            <input type="text" name="title">
+            <input type="submit" value="Add a Show!">
         </form>
-        <form method="GET" action="/">
-            <input type="text">
-            <input type="submit" name="Delete a Show!">
+        <form method="POST" action="/deleted">
+            <input type="text" name="title">
+            <input type="submit" value="Delete a Show!">
         </form>
         <h1>
             You have {{num_movies}} saved TV shows!
