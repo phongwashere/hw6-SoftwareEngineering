@@ -1,4 +1,4 @@
-from ast import IsNot
+""" importing libraries """
 import os
 import flask
 from flask_sqlalchemy import SQLAlchemy
@@ -22,6 +22,7 @@ db.create_all()
 
 @app.route("/", methods = ["GET","POST"])
 def index():
+    """ main index """
     movies = FavMovies.query.all()
     num_movies = len(movies)
     return flask.render_template("index.html", num_movies=num_movies, movies=movies)
@@ -32,7 +33,6 @@ def index2():
     if flask.request.method == "POST":
         data = flask.request.form
         new_movie = FavMovies(title=data["title"])
-        deletion = FavMovies.query.filter_by(title=data["title"]).first()
         if FavMovies.query.filter_by(title=data["title"]).first() is None:
             db.session.add(new_movie)
             db.session.commit()
@@ -43,13 +43,12 @@ def index3():
     """ creating index function """
     if flask.request.method == "POST":
         data = flask.request.form
-        new_movie = FavMovies(title=data["title"])
         deletion = FavMovies.query.filter_by(title=data["title"]).first()
         if FavMovies.query.filter_by(title=data["title"]).first() is not None:
             db.session.delete(deletion)
             db.session.commit()
         return flask.redirect("/")
-        
+
 app.run(
     debug = True
 )
